@@ -1,0 +1,65 @@
+
+
+#Paths
+SERVER=${HOME}/server
+
+
+# Commands for controlling the server
+function start {
+        (cd ${SERVER}/tomcat/bin; ./startup.sh)
+}
+
+function stop {
+        (cd ${SERVER}/tomcat/bin; ./shutdown.sh)
+}
+
+# Application log
+function log {
+        tail -f ${HOME}/site-conf/logs/tooltwist.log
+}
+
+# Tomcat log
+function logt {
+        tail -f ${SERVER}/tomcat/logs/catalina.out
+}
+
+# fipserver log
+function logf {
+        tail -f ${HOME}/site-conf/logs/fipserver.log
+}
+
+# Show java processes
+function psj {
+	ps -ef | grep java | sed G
+}
+
+
+# Write a nice intro if this is a terminal
+if [ -t 1 ] ; then
+	echo
+	echo Useful commands:
+	echo ''
+	echo '    log         Show tooltwist logfile'
+	echo '    psj         Show java processes'
+	echo '    start       Start tomcat server'
+	echo '    stop        Stop tomcat server'
+	echo '    logt        Show tomcat logfile'
+	echo '    logf        Show fipserver logfile'
+	echo ''
+fi
+
+# set up additional environment variable for prod/stage servers
+. ${HOME}/site-conf/bin/setenv.sh
+
+
+# Optional nice stuff
+
+set -o vi
+
+PS1="[\u@\h \W]\$ "
+
+function l { ls -l "$@"; }
+function lr { ls -ltr "$@"; }
+function la { ls -la "$@"; }
+function j { jobs -l "$@"; }
+

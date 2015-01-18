@@ -1,0 +1,8 @@
+This directory contains files used to set up a ToolTwist server.
+
+authorized_keys			-> ~tooltwist/.ssh
+apache-tomcat-7.0.55.tar.gz	-> ~tooltwist/server
+skeleton			-> ~
+start_fipserver.sh		-> /etc/service/fipserver/[run]
+start_tomcat.sh			-> /etc/my_init.d
+
