@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+#	Set environment variables used for this deployment
+#
+PROBLEM=N
+TARGET=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)
+[ "${DOCKER_MACHINE_NAME}" == "" ] && DOCKER_MACHINE_NAME=default
+echo 'DOCKER_MACHINE_NAME='${DOCKER_MACHINE_NAME}'.'
+DOCKER_IP=$(docker-machine ip default) || PROBLEM=Y
+#
+#############    SET ENVIRONMENT VARIABLES BELOW THIS LINE   #############
+
+
+PROJECT_NAME=docker-base-designer
+PORT=5090

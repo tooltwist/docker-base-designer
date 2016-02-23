@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+#	Start the Docker containers
+#
+
+
+# Set the environment
+DIR1=$(dirname $0);
+DIR2=$(cd ${DIR1}; pwd);
+echo "$ . ${DIR1}/SETENV"
+        . ${DIR1}/SETENV
+[ "${SETENV_PROBLEM}" != "" ] && exit 1
+
+
+# Open the page in the browser
+echo
+echo "$ open http://${DOCKER_IP}:${PORT}"
+        open http://${DOCKER_IP}:${PORT}
+[ $? != 0 ] && exit 1
+
+exit 0

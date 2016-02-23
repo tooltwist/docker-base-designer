@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+#	Start the Docker containers
+#
+
+
+# Set the environment
+DIR1=$(dirname $0);
+DIR2=$(cd ${DIR1}; pwd);
+echo "$ . ${DIR1}/SETENV"
+        . ${DIR1}/SETENV
+[ "${SETENV_PROBLEM}" != "" ] && exit 1
+
+
+
+echo "** Building image"
+docker build -t tooltwist/${PROJECT_NAME} .
+[ $? != 0 ] && exit 1
+echo Build complete
+
+
+#echo
+#echo "** Commit image"
+#docker commit tooltwist-ttdemo tooltwist/ttdemo
+#[ $? != 0 ] && exit 1
+#echo "** Ready"
+
+exit 0

@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+#	Start the Docker containers
+#
+
+# Set the environment
+DIR1=$(dirname $0);
+DIR2=$(cd ${DIR1}; pwd);
+echo "$ . ${DIR1}/SETENV"
+        . ${DIR1}/SETENV
+[ "${SETENV_PROBLEM}" != "" ] && exit 1
+
+
+# Tag the image
+VERSION=$(date +%Y%m%d-%H%M)
+echo ''
+echo '$' docker tag tooltwist/${PROJECT_NAME} tooltwist/${PROJECT_NAME}:${VERSION}
+         docker tag tooltwist/${PROJECT_NAME} tooltwist/${PROJECT_NAME}:${VERSION}
+if [ "$?" != "0" ] ; then
+	echo "Image not tagged."
+	exit 1
+fi
+
+# Push this version to docker hub
+echo ''
+echo '$' docker push tooltwist/${PROJECT_NAME}:${VERSION}
+         docker push tooltwist/${PROJECT_NAME}:${VERSION}
+if [ "$?" != "0" ] ; then
+	echo "Image not pushed."
+	exit 1
+fi
+
+# Also push this to docker hub as 'latest'
+echo ''
+echo '$' docker push tooltwist/${PROJECT_NAME}:latest
+         docker push tooltwist/${PROJECT_NAME}:latest
+if [ "$?" != "0" ] ; then
+	echo "Image not pushed."
+	exit 1
+fi
+exit 0

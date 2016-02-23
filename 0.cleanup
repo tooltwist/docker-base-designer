@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+#	Start the Docker containers
+#
+
+
+# Set the environment
+DIR1=$(dirname $0);
+DIR2=$(cd ${DIR1}; pwd);
+echo "$ . ${DIR1}/SETENV"
+        . ${DIR1}/SETENV
+[ "${SETENV_PROBLEM}" != "" ] && exit 1
+
+
+# Remove the container
+echo
+echo "$ docker rm ${PROJECT_NAME}"
+        docker rm ${PROJECT_NAME}
+[ $? != 0 ] && exit 1
+echo "** All ok"
+
+exit 0
